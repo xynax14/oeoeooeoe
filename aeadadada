@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Для тебя</title>
+    <style>
+        /* Фон с плавной сменой цветов */
+        body {
+            background: linear-gradient(45deg, #b08cc7, #d8a7e3, #c89be6);
+            background-size: 300% 300%;
+            animation: backgroundAnimation 8s infinite alternate;
+            font-family: "Arial", sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            transition: background 2s ease-in-out;
+        }
+        @keyframes backgroundAnimation {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        /* Заголовки */
+        h1 {
+            color: white;
+            font-size: 3em;
+            margin-top: 50px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+            animation: glow 2s infinite alternate;
+        }
+        h2 {
+            color: white;
+            font-size: 2em;
+            margin-top: 10px;
+            opacity: 0.9;
+            animation: fadeIn 3s infinite alternate;
+        }
+
+        @keyframes glow {
+            0% { text-shadow: 0 0 5px white; }
+            100% { text-shadow: 0 0 15px white; }
+        }
+        @keyframes fadeIn {
+            0% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        /* Анимированный текст, меняющийся каждую 4 секунды */
+        .changing-text {
+            font-size: 1.8em;
+            color: white;
+            animation: changeText 12s infinite;
+        }
+        @keyframes changeText {
+            0%, 33% { content: "Ты у меня самая лучшая!"; }
+            34%, 66% { content: "Ты мое счастье ❤️"; }
+            67%, 100% { content: "Ты освещаешь мою жизнь ✨"; }
+        }
+
+        /* Кнопки */
+        button {
+            padding: 15px 30px;
+            font-size: 1.2em;
+            background: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            margin: 10px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+            transition: 0.3s;
+        }
+        button:hover {
+            background: #e5b3ff;
+        }
+
+        /* Эффект вспышки */
+        .flash {
+            animation: flashEffect 0.8s;
+        }
+        @keyframes flashEffect {
+            0% { background: white; }
+            100% { background: linear-gradient(45deg, #b08cc7, #d8a7e3, #c89be6); }
+        }
+    </style>
+</head>
+<body>
+    <h1>Ты у меня самая лучшая!</h1>
+    <h2 class="changing-text">Ты у меня самая лучшая!</h2>
+
+    <button onclick="showHearts()">❤️ Запустить сердечки</button>
+    <button onclick="toggleMusic()">🎵 Включить музыку</button>
+    <button onclick="surprise()">✨ Показать сюрприз</button>
+
+    <!-- Музыкальный плеер -->
+    <audio id="backgroundMusic" loop>
+        <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mp3">
+        Ваш браузер не поддерживает аудиоплеер.
+    </audio>
+
+    <script>
+        // Функция для показа сердечек
+        function showHearts() {
+            for (let i = 0; i < 20; i++) {
+                let heart = document.createElement("div");
+                heart.classList.add("heart");
+                document.body.appendChild(heart);
+
+                let x = Math.random() * window.innerWidth;
+                let y = window.innerHeight;
+
+                heart.style.left = x + "px";
+                heart.style.top = y + "px";
+
+                setTimeout(() => { heart.remove(); }, 4000);
+            }
+        }
+
+        // Функция для управления музыкой
+        let music = document.getElementById("backgroundMusic");
+        function toggleMusic() {
+            if (music.paused) {
+                music.play();
+            } else {
+                music.pause();
+            }
+        }
+// Функция для сюрприза
+        function surprise() {
+            document.body.classList.add("flash");
+            setTimeout(() => {
+                document.body.classList.remove("flash");
+            }, 800);
+            document.querySelector("h1").innerText = "Ты самое чудесное, что есть в моей жизни!";
+            document.querySelector("h2").innerText = "Спасибо, что ты рядом ❤️";
+        }
+    </script>
+</body>
+</html>
